@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import * as Font from "expo-font";
+import { useContext, useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -9,95 +9,114 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { FontContext } from "./Context";
 
 const GoBack = ({ navigation }) => {
-  return(
-    <TouchableOpacity onPress={()=>navigation.goBack() }>
-          <Image source={require("../assets/images/icons/arrow-left.png")} /> 
+  return (
+    <TouchableOpacity onPress={() => navigation.goBack()}>
+      <Image source={require("../assets/images/icons/arrow-left.png")} />
     </TouchableOpacity>
-  )
+  );
 };
 
-const Navbar = ({ navigation }) => {
-  const [font, setFont] = useContext(FontContext)
-
+const Navbar = ({navigation}) => {
+  const [font, setFont] = useContext(FontContext);
+  const navigate = useNavigation()
   const routeName = useRoute();
-  console.log(routeName);
 
 
+  if (font) {
+    return (
+      <View style={styles.navbar}>
+        <View style={styles.view}>
+          <Pressable style={styles.pres} onPress={()=> navigate.navigate({name:"Home"})}>
+            <Image
+              source={
+                routeName.name.includes("Home")
+                  ? require("../assets/images/icons/grid-4.png")
+                  : require("../assets/images/icons/gridDark-4.png")
+              }
+              style={{ width: 33, height: 33 }}
+            />
+            <Text
+              style={
+                routeName.name === "Home"
+                  ? { ...styles.text, color: "#fff" }
+                  : styles.text
+              }
+            >
+              Home
+            </Text>
+          </Pressable>
 
-  return (
-    <View style={styles.navbar}>
-      <View style={styles.view}>
-        <Pressable style={styles.pres}>
-          <Image
-            source={
-              routeName.name === "Home"
-                ? require("../assets/images/icons/grid-4.png")
-                : require("../assets/images/icons/gridDark-4.png")
-            }
-            style={{ width: 33, height: 33 }}
-          />
-          <Text
+          <Pressable style={styles.pres}>
+            <Image
+              source={
+                routeName.name == "Limits"
+                  ? require("../assets/images/icons/limitsHover.png")
+                  : require("../assets/images/icons/limits.png")
+              }
+              style={{ width: 33, height: 33 }}
+            />
+            <Text style={styles.text}>Limits</Text>
+          </Pressable>
+
+          <Pressable
             style={
-              routeName.name === "Home"
-                ? { ...styles.text, color: "#fff" }
-                : styles.text
+              routeName.name == "Help"
+                ? { backgroundColor: "#171513", ...styles.pres }
+                : { ...styles.pres }
             }
           >
-            Home
-          </Text>
-        </Pressable>
-
-        <Pressable style={styles.pres}>
+            <Image
+              source={
+                routeName.name === "Help"
+                  ? require("../assets/images/icons/help.png")
+                  : require("../assets/images/icons/helpDark.png")
+              }
+              style={{ width: 33, height: 33 }}
+            />
+            <Text
+              style={
+                routeName.name === "Help"
+                  ? { ...styles.text, color: "#fff" }
+                  : styles.text
+              }
+            >
+              Help
+            </Text>
+          </Pressable>
+          <Pressable style={styles.pres}>
+            <Image
+              source={
+                routeName.name === "Notices"
+                  ? require("../assets/images/icons/belldark.png")
+                  : require("../assets/images/icons/bell.png")
+              }
+              style={{ width: 33, height: 33 }}
+            />
+            <Text
+              style={
+                routeName.name === "Notices"
+                  ? { ...styles.text, color: "#fff" }
+                  : styles.text
+              }
+            >
+              Notices
+            </Text>
+          </Pressable>
+          <Pressable style={styles.pres} onPress={()=> navigate.navigate({name:"More"})}>
           <Image
             source={
-              routeName.name == "Limits"
-                ? require("../assets/images/icons/limitsHover.png")
-                : require("../assets/images/icons/limits.png")
-            }
-            style={{ width: 33, height: 33 }}
-          />
-          <Text style={styles.text}>Limits</Text>
-        </Pressable>
-
-        <Pressable
-          style={
-            routeName.name == "Help"
-              ? { backgroundColor: "#171513", ...styles.pres }
-              : { ...styles.pres }
-          }
-        >
-          <Image
-            source={
-              routeName.name === "Help"
-                ? require("../assets/images/icons/help.png")
-                : require("../assets/images/icons/helpDark.png")
-            }
-            style={{ width: 33, height: 33 }}
-          />
-          <Text
-            style={
-              routeName.name === "Help"
-                ? { ...styles.text, color: "#fff" }
-                : styles.text
-            }
-          >
-            Help
-          </Text>
-        </Pressable>
-        <Pressable style={styles.pres}>
-          <Image
-            source={
-              routeName.name === "Notices"
-                ? require("../assets/images/icons/belldark.png")
-                : require("../assets/images/icons/bell.png")
+              routeName.name === "More"
+                ? require("../assets/images/icons/menu-hamburger-dark.png")
+                : require("../assets/images/icons/menu-hamburger.png")
             }
             style={{ width: 33, height: 33 }}
           />
           <Text
             style={
-              routeName.name === "Notices"
+              routeName.name === "More"
                 ? { ...styles.text, color: "#fff" }
                 : styles.text
             }
@@ -105,34 +124,24 @@ const Navbar = ({ navigation }) => {
             Notices
           </Text>
         </Pressable>
-        <Pressable
-          style={
-            routeName.name == "Account"
-              ? { ...styles.pres }
-              : { ...styles.pres }
-          }
-        >
-          <Image
-            source={require("../assets/images/icons/menu-hamburger.png")}
-            style={{}}
-          />
-          <Text style={styles.text}>Menu</Text>
-        </Pressable>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 };
-export { Navbar, GoBack};
+export { Navbar, GoBack };
 const styles = StyleSheet.create({
   navbar: {
     width: "100%",
-    justifyContent: "center",
+
+    height: 50,
     alignItems: "center",
     position: "absolute",
-    bottom: 14,
+    bottom: 0,
+    backgroundColor: "#060606",
   },
   view: {
-    width: "90%",
+    width: "95%",
     borderRadius: 30,
 
     height: 80,
@@ -141,6 +150,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     backgroundColor: "#282828",
+    position: "absolute",
+    top: -50,
   },
   pres: {
     width: "15%",

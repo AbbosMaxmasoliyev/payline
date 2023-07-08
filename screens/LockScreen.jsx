@@ -1,10 +1,18 @@
 import { View, Text } from 'react-native'
 import LockNumber from '../components/LockNumber'
 import { StyleSheet } from 'react-native'
-const LockScreen = () => {
+import { GoBack } from '../components/Navbar'
+import CarouselWrapper from '../components/Carousel'
+const LockScreen = ({}) => {
+  const set = true
   return (
     <View style={style.container}>
-      <LockNumber set={true}/>
+    {set ? (
+      <View style={{ position: "absolute", top: "10%", left: "8%" }}>
+        <GoBack />
+      </View>
+    ) : null}
+      <LockNumber set={"confirm"}/>
     </View>
   )
 }

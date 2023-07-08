@@ -12,14 +12,10 @@ const LockNumber = ({ set, confirm }) => {
   console.log(password);
   return (
     <View>
-      {set ? (
-        <View style={{ position: "absolute", top: "10%", left: "8%" }}>
-          <GoBack />
-        </View>
-      ) : null}
+      
 
       <Text style={styles.text}>PIN kodni kiriting</Text>
-      {set ? (
+      {set==="set" ? (
         <Text
           style={{
             color: "#878787",
@@ -32,6 +28,21 @@ const LockNumber = ({ set, confirm }) => {
           }}
         >
           Kiritilgan PIN kod 4 ta belgi bo’lishi shart
+        </Text>
+      ) : null}
+      {set==="confirm" ? (
+        <Text
+          style={{
+            color: "#878787",
+            marginBottom: 25,
+            fontSize: 13,
+            width: 200,
+            textAlign: "center",
+            alignSelf: "center",
+            fontFamily: "MonstserratLight",
+          }}
+        >
+        Kiritilgan PIN kod bilan tasdiqlang
         </Text>
       ) : null}
       <View style={styles.password}>

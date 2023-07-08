@@ -22,6 +22,11 @@ import Loading from "./screens/Loading";
 import LockScreen from "./screens/LockScreen";
 import * as Font from "expo-font";
 import { FontContext } from "./components/Context";
+import Main from "./screens/Main";
+import MoreScreen from "./screens/MoreScreen";
+import Send from "./screens/Send";
+import SendMoneyCalculator from "./screens/SendMoneyCalculator";
+import SelectCard from "./screens/SelectCard";
 
 const Tab = createBottomTabNavigator();
 const App = () => {
@@ -31,6 +36,8 @@ const App = () => {
     Font.loadAsync({
       Monstserrat: require("./assets/fonts/aquire/Montserrat-Bold.ttf"),
       MonstserratLight: require("./assets/fonts/aquire/Montserrat-Light.ttf"),
+      MontserratMedium: require("./assets/fonts/aquire/Montserrat-Medium.ttf"),
+      MontserratRegular: require("./assets/fonts/aquire/MontserratRegular.ttf"),
       Aquire: require("./assets/fonts/aquire/AquireBold-8Ma60.otf"),
     }).then(() => setFont(true));
   }, []);
@@ -62,10 +69,14 @@ const App = () => {
               tabBarInactiveTintColor: "gray",
             })}
           >
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Login" component={LockScreen} />
-            <Tab.Screen name="Language" component={LanguagesScreen} />
-            <Tab.Screen name="Password" component={PasswordAuth} />
+          <Tab.Screen name="Home" component={Main} />
+          <Tab.Screen name="More" component={MoreScreen} />
+          <Tab.Screen name="Login" component={LockScreen} />
+          <Tab.Screen name="Language" component={LanguagesScreen} />
+          <Tab.Screen name="Password" component={PasswordAuth} />
+          <Tab.Screen name="Home_Send" component={Send} />
+          <Tab.Screen name="Home_Send_Calculator"  component={SendMoneyCalculator} />
+          <Tab.Screen name="Home_Send_SelectCard"  component={SelectCard} />
           </Tab.Navigator>
         </NavigationContainer>
       </FontContext.Provider>

@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "react-native";
 import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
-const CustomKeyboard = ({ onKeyPress, deleteLet }) => {
+const CustomKeyboard = ({ onKeyPress, deleteLet, dot }) => {
   const handleKeyPress = (key) => {
     onKeyPress(key);
   };
@@ -75,7 +75,7 @@ const CustomKeyboard = ({ onKeyPress, deleteLet }) => {
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.key}
-         
+          onPress={() => dot?handleKeyPress("."):null}
         >
           <Text style={styles.keyText}>.</Text>
         </TouchableOpacity>
