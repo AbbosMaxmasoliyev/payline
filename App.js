@@ -6,8 +6,8 @@ import {
   TextInput,
   Image,
   Pressable,
+  Button,
 } from "react-native";
-
 
 import LanguagesScreen from "./screens/Language";
 import Login from "./screens/Login";
@@ -27,10 +27,80 @@ import MoreScreen from "./screens/MoreScreen";
 import Send from "./screens/Send";
 import SendMoneyCalculator from "./screens/SendMoneyCalculator";
 import SelectCard from "./screens/SelectCard";
+import Recepient from "./screens/Recepient";
+import BankCard from "./screens/BankCard";
+import DeliverCard from "./screens/DeliverCard";
 
-const Tab = createBottomTabNavigator();
-const App = () => {
-  const [font, setFont]=useState(false)
+// const Tab = createBottomTabNavigator();
+// const App = () => {
+//   const [font, setFont]=useState(false)
+
+//   useEffect(() => {
+//     Font.loadAsync({
+//       Monstserrat: require("./assets/fonts/aquire/Montserrat-Bold.ttf"),
+//       MonstserratLight: require("./assets/fonts/aquire/Montserrat-Light.ttf"),
+//       MontserratMedium: require("./assets/fonts/aquire/Montserrat-Medium.ttf"),
+//       MontserratRegular: require("./assets/fonts/aquire/MontserratRegular.ttf"),
+//       Aquire: require("./assets/fonts/aquire/AquireBold-8Ma60.otf"),
+//     }).then(() => setFont(true));
+//   }, []);
+
+//   return (
+//     <View style={styles.container}>
+//       <FontContext.Provider value={[font, setFont]}>
+//         <NavigationContainer >
+//           <Tab.Navigator
+//             screenOptions={({ route }) => ({
+//               headerShown: false,
+//               tabBarStyle: {
+//                 display: "none",
+//               },
+//               tabBarIcon: ({ focused, color, size }) => {
+//                 let iconName;
+
+//                 if (route.name === "Home") {
+//                   iconName = focused ? "ios-home" : "ios-home-outline";
+//                 } else if (route.name === "Settings") {
+//                   iconName = focused ? "ios-list" : "ios-list-outline";
+//                 }
+
+//                 // You can return any component that you like here!
+//                 return <Ionicons name={iconName} size={size} color={color} />;
+//               },
+//               tabBarActiveTintColor: "tomato",
+//               tabBarInactiveTintColor: "gray",
+//             })}
+//           >
+//           <Stack.Screen name="Home" component={Main} />
+//           <Stack.Screen name="More" component={MoreScreen} />
+//           <Stack.Screen name="Login" component={LockScreen} />
+//           <Stack.Screen name="Language" component={LanguagesScreen} />
+//           <Stack.Screen name="Password" component={PasswordAuth} />
+//           <Stack.Screen name="Home_Send" component={Send} />
+//           <Stack.Screen name="Home_Send_Calculator"  component={SendMoneyCalculator} />
+//           <Stack.Screen name="Home_Send_SelectCard"  component={SelectCard} />
+//           <Stack.Screen name="Home_Send_NewRecepient"  component={Recepient} />
+//           <Stack.Screen name="Home_Send_BankCard"  component={BankCard} />
+//           <Stack.Screen name="Home_Send_DeliverCard"  component={DeliverCard} />
+//           </Tab.Navigator>
+//         </NavigationContainer>
+//       </FontContext.Provider>
+//     </View>
+//   );
+// };
+
+// import * as React from "react";
+// import { Button, View, Text } from "react-native";
+// import { NavigationContainer } from "@react-navigation/native";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DetailsScreen from "./screens/DetailsScreen";
+import AddCard from "./screens/AddCard";
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  const [font, setFont] = useState(false);
 
   useEffect(() => {
     Font.loadAsync({
@@ -41,66 +111,42 @@ const App = () => {
       Aquire: require("./assets/fonts/aquire/AquireBold-8Ma60.otf"),
     }).then(() => setFont(true));
   }, []);
-
-
-  return (
-    <View style={styles.container}>
+  if (font) {
+    return (
       <FontContext.Provider value={[font, setFont]}>
-        <NavigationContainer >
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              headerShown: false,
-              tabBarStyle: {
-                display: "none",
-              },
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === "Home") {
-                  iconName = focused ? "ios-home" : "ios-home-outline";
-                } else if (route.name === "Settings") {
-                  iconName = focused ? "ios-list" : "ios-list-outline";
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
-          <Tab.Screen name="Home" component={Main} />
-          <Tab.Screen name="More" component={MoreScreen} />
-          <Tab.Screen name="Login" component={LockScreen} />
-          <Tab.Screen name="Language" component={LanguagesScreen} />
-          <Tab.Screen name="Password" component={PasswordAuth} />
-          <Tab.Screen name="Home_Send" component={Send} />
-          <Tab.Screen name="Home_Send_Calculator"  component={SendMoneyCalculator} />
-          <Tab.Screen name="Home_Send_SelectCard"  component={SelectCard} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <View style={{backgroundColor:"#060606", flex:1}}>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{ headerShown: false }}
+            >
+              <Stack.Screen name="Home" component={Main} />
+              <Stack.Screen name="More" component={MoreScreen} />
+              <Stack.Screen name="Login" component={LockScreen} />
+              <Stack.Screen name="Language" component={LanguagesScreen} />
+              <Stack.Screen name="Password" component={PasswordAuth} />
+              <Stack.Screen name="Home_Send" component={Send} />
+              <Stack.Screen
+                name="Home_Send_Calculator"
+                component={SendMoneyCalculator}
+              />
+              <Stack.Screen
+                name="Home_Send_SelectCard"
+                component={SelectCard}
+              />
+              <Stack.Screen
+                name="Home_Send_NewRecepient"
+                component={Recepient}
+              />
+              <Stack.Screen name="Home_Send_BankCard" component={BankCard} />
+              <Stack.Screen name="Home_Send_DeliverCard" component={DeliverCard} />
+              <Stack.Screen name="Home_AddCard" component={AddCard} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
       </FontContext.Provider>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  app: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "#060606",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  container: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "space-between",
-
-    display: "flex",
-    backgroundColor: "#060606",
-  },
-});
+    );
+  }
+}
 
 export default App;

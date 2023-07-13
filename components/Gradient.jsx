@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyle } from "../styles/styles";
 import { Image } from "react-native";
+import { Dimensions } from "react-native";
+
+
+
 const Gradient = ({ children, style }) => {
   return (
-    <View style={GlobalStyle.gradient}>
+    <View style={{...GlobalStyle.gradient, ...style}}>
       <View style={GlobalStyle.left}>
         <Image
           source={require("../assets/images/shadow.png")}
@@ -21,4 +25,6 @@ const Gradient = ({ children, style }) => {
   );
 };
 export default Gradient;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+});

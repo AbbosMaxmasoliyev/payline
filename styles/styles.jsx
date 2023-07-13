@@ -1,5 +1,6 @@
+import { Dimensions } from "react-native";
 import { StyleSheet } from "react-native";
-
+const {height, width}= Dimensions.get("screen")
 let GlobalStyle = StyleSheet.create({
   btn: {
     width: "80%",
@@ -71,8 +72,8 @@ let GlobalStyle = StyleSheet.create({
   },
   gradient: {
     backgroundColor: "#060606",
-    minWidth: "100%",
-    minHeight: "100%",
+    minWidth: width,
+    minHeight: height,
   },
   left: {
    

@@ -232,7 +232,7 @@ const Send = () => {
               details
             </Text>
           </View>
-          <Pressable style={styles.btn}>
+          <Pressable style={styles.btn} onPress={()=> navigation.navigate("Home_Send_NewRecepient")}>
             <Image source={require("../assets/images/addrecepient.png")} />
             <Text style={styles.btntext}>New recipient</Text>
           </Pressable>

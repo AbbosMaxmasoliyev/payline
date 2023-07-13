@@ -14,8 +14,8 @@ import { useContext, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native";
 
-const Main = () => {
-  const navigation = useNavigation();
+const Main = ({navigation}) => {
+  // const navigation = useNavigation();
 
   const [font, setFont] = useContext(FontContext);
 
@@ -41,7 +41,7 @@ const Main = () => {
               </Pressable>
               <Pressable
                 style={{ ...styles.back }}
-                onPress={() => navigation.navigate({ name: "Home_Send" })}
+                onPress={() => navigation.navigate("Home_Send" )}
               >
                 <Text style={styles.text}>Send</Text>
               </Pressable>

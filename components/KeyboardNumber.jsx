@@ -2,32 +2,31 @@ import React from "react";
 import { Image } from "react-native";
 import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 
-const CustomKeyboard = ({ onKeyPress, deleteLet, dot }) => {
-  const handleKeyPress = (key) => {
-    onKeyPress(key);
-  };
+const CustomKeyboard = ({ onKeyPress, deleteLet, dot, style }) => {
+ 
+  
   const deleteItem = ()=>{
     deleteLet()
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, ...style}}>
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("1")}
+          onPress={() => onKeyPress("1")}
         >
           <Text style={styles.keyText}>1</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("2")}
+          onPress={() => onKeyPress("2")}
         >
           <Text style={styles.keyText}>2</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("3")}
+          onPress={() => onKeyPress("3")}
         >
           <Text style={styles.keyText}>3</Text>
         </TouchableOpacity>
@@ -35,19 +34,19 @@ const CustomKeyboard = ({ onKeyPress, deleteLet, dot }) => {
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("4")}
+          onPress={() => onKeyPress("4")}
         >
           <Text style={styles.keyText}>4</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("5")}
+          onPress={() => onKeyPress("5")}
         >
           <Text style={styles.keyText}>5</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("6")}
+          onPress={() => onKeyPress("6")}
         >
           <Text style={styles.keyText}>6</Text>
         </TouchableOpacity>
@@ -55,19 +54,19 @@ const CustomKeyboard = ({ onKeyPress, deleteLet, dot }) => {
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("7")}
+          onPress={() => onKeyPress("7")}
         >
           <Text style={styles.keyText}>7</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("8")}
+          onPress={() => onKeyPress("8")}
         >
           <Text style={styles.keyText}>8</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("9")}
+          onPress={() => onKeyPress("9")}
         >
           <Text style={styles.keyText}>9</Text>
         </TouchableOpacity>
@@ -75,13 +74,13 @@ const CustomKeyboard = ({ onKeyPress, deleteLet, dot }) => {
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => dot?handleKeyPress("."):null}
+          onPress={() => dot?onKeyPress("."):null}
         >
           <Text style={styles.keyText}>.</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.key}
-          onPress={() => handleKeyPress("0")}
+          onPress={() => onKeyPress("0")}
         >
           <Text style={styles.keyText}>0</Text>
         </TouchableOpacity>
