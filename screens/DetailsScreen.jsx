@@ -1,17 +1,21 @@
-import { Text } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Keyboard } from "react-native";
+import { TextInput, Text } from "react-native";
 import { View } from "react-native";
-import { Button } from "react-native-elements";
+// import { Button } from "react-native-elements";
 
-function DetailsScreen({navigation}) {
+function DetailsScreen({ navigation }) {
+
+
+ 
+
+
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+
+      
+
     </View>
   );
 }

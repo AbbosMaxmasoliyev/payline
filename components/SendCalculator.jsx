@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, Keyboard } from "react-native";
 import Box from "./Box";
 import { Pressable } from "react-native";
 import CustomKeyboard from "./KeyboardNumber";
@@ -6,16 +6,25 @@ import { ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Dimensions } from "react-native";
 
-const Information = ({ info, title, subtitle, keyPress }) => {
+
+
+const { width, height } = Dimensions.get("screen")
+
+const Information = ({ info, title, subtitle, keyPress, not }) => {
 
   return (
     <View style={styles.box}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subtitle}>{subtitle}</Text>
+      <Text style={{ ...styles.subtitle, flexWrap: "wrap" }}>
+        {subtitle}
+          {"\n"}
+        <Text style={{ textDecorationLine: "line-through", textDecorationStyle: "solid", textDecorationColor: "#fff", width: "100%",  }}>{not}</Text>
+      </Text>
       {info ? (
         <Pressable onPress={() => keyPress}>
-          <Image source={require("../assets/images/icons/info.png")} />
+          <Image style={{ width: 12, height: 12 }} source={require("../assets/images/icons/info.png")} />
         </Pressable>
       ) : null}
     </View>
@@ -35,8 +44,8 @@ const SendCalculator = () => {
     setGetMoney({ name: "UZS", amount: currency.amount * sendTranfer });
   }, [sendTranfer]);
   return (
-    <View style={{marginTop:100, paddingHorizontal:"5%"}}>
-      <Box style={{ paddingVertical: 20, alignItems: "center" }}>
+    <View style={{ marginTop: 80, height: "75%", paddingHorizontal: "5%" }}>
+      <Box style={{ paddingVertical: 10, alignItems: "center" }}>
         <View style={styles.moneyContainer}>
           <View style={styles.moneyStyle}>
             <Text style={styles.pay}>You Pay</Text>
@@ -60,7 +69,7 @@ const SendCalculator = () => {
           </View>
         </View>
         <View style={styles.info}>
-          <Information title={"Fee"} subtitle={"No Comission"} />
+          <Information title={"Fee"} subtitle={"No Comission"} not={"4 PLN"} />
           <Information
             title={"Today’s rate"}
             subtitle={"1 PLN = 2.810 UZS"}
@@ -73,14 +82,14 @@ const SendCalculator = () => {
           />
         </View>
 
-        <View style={{height:"60%", alignItems:"center"}}>
+        <View style={{ height: "55%", alignItems: "center" }}>
           <CustomKeyboard
             dot={true}
             deleteLet={() => setsendTranfer((prev) => prev.slice(0, -1))}
             onKeyPress={(e) => setsendTranfer((prev) => prev + e)}
           />
-          <TouchableOpacity style={styles.touch} onPress={()=>navigation.navigate("Home_Send_SelectCard") }>
-              <Text style={styles.touchText}>Continue</Text>
+          <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate("Home_Send_SelectCard")}>
+            <Text style={styles.touchText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </Box>
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
   moneyContainer: {
     flexDirection: "row",
     width: "90%",
-    justifyContent: "space-around",
+    justifyContent: "center",
   },
   money: {
     flexDirection: "column",
@@ -106,8 +115,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    marginBottom:23
+    justifyContent: "center",
+    marginBottom: 23
   },
   prestext: {
     color: "#fff",
@@ -117,23 +126,23 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   money: {
- 
+
 
     textAlign: "center",
-    fontFamily:"MontserratMedium",
-    fontSize:20,
-    marginVertical:10,
-    color:"#DA630E"
+    fontFamily: "MontserratMedium",
+    fontSize: 20,
+    marginVertical: 10,
+    color: "#DA630E"
   },
-  moneyStyle:{
-    width:"50%",
-    alignItems:"center",
+  moneyStyle: {
+    width: "50%",
+    alignItems: "center",
   },
   pay: {
     color: "#fff",
     textAlign: "center",
-    fontFamily:"MonstserratLight",
-    fontSize:18
+    fontFamily: "MonstserratLight",
+    fontSize: 18
   },
   info: {
     width: "90%",
@@ -151,7 +160,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
     justifyContent: "center",
-    height: 60,
+    height: 70,
   },
   title: {
     height: "40%",
@@ -159,9 +168,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    lineHeight: 20,
+    lineHeight: 15,
     color: "#fff",
     fontFamily: "MonstserratLight",
+    fontSize: width / 35
   },
   subtitle: {
     height: "60%",
@@ -169,24 +179,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "MontserratMedium",
     color: "#fff",
-    fontSize: 12,
-   
-  },
-  touch:{
-    paddingVertical:8,
-    paddingHorizontal:45,
-
-
-    marginTop:-35,
-    minWidth:"90%",
-    backgroundColor:"#FF6B01",
-    borderRadius:20,
+    fontSize: width / 40,
 
   },
-  touchText:{
-    color:"#fff",
-    fontFamily:"MontserratMedium",
-    fontSize:20,
-    textAlign:"center",
+  touch: {
+    paddingVertical: 8,
+    paddingHorizontal: 45,
+
+
+    marginTop: -35,
+    minWidth: "90%",
+    backgroundColor: "#FF6B01",
+    borderRadius: 20,
+
+  },
+  touchText: {
+    color: "#fff",
+    fontFamily: "MontserratMedium",
+    fontSize: 20,
+    textAlign: "center",
   }
 });

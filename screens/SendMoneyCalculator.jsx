@@ -7,13 +7,19 @@ const SendMoneyCalculator = () => {
   
     const route = useRoute()
   return (
-    <View>
-      <Gradient>
+    <View style={styles.container}>
+      <Gradient style={{flexDirection:"column", justifyContent:"center"}}>
         <SendCalculator/>
-        <Navbar/>
       </Gradient>
+        <Navbar/>
     </View>
   )
 }
 export default SendMoneyCalculator
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    flexDirection:"column",
+    justifyContent:"center"
+  }
+})

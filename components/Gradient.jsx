@@ -8,18 +8,8 @@ import { Dimensions } from "react-native";
 const Gradient = ({ children, style }) => {
   return (
     <View style={{...GlobalStyle.gradient, ...style}}>
-      <View style={GlobalStyle.left}>
-        <Image
-          source={require("../assets/images/shadow.png")}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </View>
-      <View style={GlobalStyle.right}>
-        <Image
-          source={require("../assets/images/shadow.png")}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </View>
+      
+      
       {children}
     </View>
   );

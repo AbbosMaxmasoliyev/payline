@@ -1,11 +1,15 @@
-import { Image } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
-import { SvgWithCssUri } from "react-native-svg";
+import { StyleSheet, TouchableOpacity, Text, Image, View } from "react-native";
 import { Navbar } from "../components/Navbar";
 import Box from "../components/Box";
 import Gradient from "../components/Gradient";
+import { useNavigation } from "@react-navigation/native";
+import { useReducer } from "react";
+import reducer from "../components/Reducers";
+
 const MoreScreen = () => {
+  const navigation = useNavigation()
+
+
   return (
     <View style={styles.container}>
       <Box style={styles.internal}>
@@ -15,7 +19,7 @@ const MoreScreen = () => {
             <Image source={require("../assets/images/icons/user-01.png")} />
             <Text style={styles.text}>My Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Home_Send_SelectCard")}>
             <Image source={require("../assets/images/icons/card.png")} />
             <Text style={styles.text}>My Cards</Text>
           </TouchableOpacity>
@@ -23,7 +27,7 @@ const MoreScreen = () => {
             <Image source={require("../assets/images/icons/security.png")} />
             <Text style={styles.text}>Security</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("More_Currency")}>
             <Image source={require("../assets/images/icons/currency.png")} />
             <Text style={styles.text}>Currency</Text>
           </TouchableOpacity>

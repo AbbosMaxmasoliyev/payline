@@ -106,18 +106,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
    
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    flex:1
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     gap:15,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   key: {
     width:150,
     flex: 1,
-    height:58,
+    height:40,
     backgroundColor: "transparent",
     borderRadius: 5,
     marginHorizontal: 5,

@@ -10,19 +10,42 @@ import CarouselWrapper from "../components/Carousel";
 import { Navbar } from "../components/Navbar";
 import Transactions from "../components/Transactions";
 import { FontContext } from "../components/Context";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native";
+import MyTabs from "./TabNavigator";
+import { Keyboard } from "react-native";
+// import animationData from './animation_lkvavsl4.json';
+import AnimatedLottieView from "lottie-react-native";
+const { width, height } = Dimensions.get("screen")
 
-const Main = ({navigation}) => {
+const Main = ({ navigation }) => {
   // const navigation = useNavigation();
 
   const [font, setFont] = useContext(FontContext);
 
+
+  useEffect(() => {
+    async function Run() {
+      const result = await fetch('https://bear-payline-server-87da0985e77c.herokuapp.com/api/country/get/all')
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
+    Run();
+  }, [])
+
   if (font) {
     return (
-      <View style={styles.container}>
-        <ScrollView>
+      <View style={styles.container} onPointerEnter={() => Keyboard.dismiss()}>
+        <ScrollView style={{ flex: 1, height: height - 30, marginTop: 30 }}>
           <CarouselWrapper />
           <View
             style={{ flexDirection: "column", gap: 17, alignItems: "center" }}
@@ -36,12 +59,12 @@ const Main = ({navigation}) => {
                 justifyContent: "space-between",
               }}
             >
-              <Pressable style={{ ...styles.back }}>
+              <Pressable style={{ ...styles.back }} onPress={() => navigation.navigate("Home_Request")}>
                 <Text style={styles.text}>Request</Text>
               </Pressable>
               <Pressable
                 style={{ ...styles.back }}
-                onPress={() => navigation.navigate("Home_Send" )}
+                onPress={() => navigation.navigate("Home_Send")}
               >
                 <Text style={styles.text}>Send</Text>
               </Pressable>
@@ -84,13 +107,17 @@ const styles = StyleSheet.create({
   dotsContainer: {
     width: 120,
     height: 50,
-    borderColor: "red",
-    borderWidth: 1,
   },
   container: {
-    backgroundColor: "white",
+    width: width,
+    height: height - 30,
+    marginTop: 30,
+    backgroundColor: "#060606",
+    borderColor: "red",
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    flex: 1,
   },
   summaryScrollContainer: {
     marginBottom: 12,

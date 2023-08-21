@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Send = () => {
   const navigation = useNavigation()
+
   const myShadowStyle = new StyleSheet.create({
     elevation: 3,
     shadowOpacity: 0.2,
@@ -213,7 +214,7 @@ const Send = () => {
     },
   ];
 
-  const [myCardsThree, setMyCardsThree] = useState(data.slice(0, 3));
+  const [myCardsThree, setMyCardsThree] = useState(data);
   return (
     <Gradient>
       <View style={styles.container}>
@@ -232,22 +233,24 @@ const Send = () => {
               details
             </Text>
           </View>
-          <Pressable style={styles.btn} onPress={()=> navigation.navigate("Home_Send_NewRecepient")}>
+          <Pressable style={styles.btn} onPress={() => {
+            navigation.navigate("Home_Send_NewRecepient")
+          }}>
             <Image source={require("../assets/images/addrecepient.png")} />
             <Text style={styles.btntext}>New recipient</Text>
           </Pressable>
 
-          <Text style={{ ...styles.subtitle, width:"90%", marginBottom:10 }}>My Recipients</Text>
+          <Text style={{ ...styles.subtitle, width: "90%", marginBottom: 10 }}>My Recipients</Text>
 
           <ScrollView
             style={styles.scroll}
             showsVerticalScrollIndicator={false}
             invertStickyHeaders={false}
           >
-            <View style={{ width: "90%", marginVertical: 25 }}>
+            <View style={{ width: "90%", marginVertical: 10 }}>
               <View>
                 {myCardsThree.map((item, index) => (
-                  <TouchableOpacity style={styles.item} key={index} onPress={()=> navigation.navigate("Home_Send_Calculator", {item})}>
+                  <TouchableOpacity style={styles.item} key={index} onPress={() => navigation.navigate("Home_Send_Calculator", { item })}>
                     <CountryTransfer image={item.country.imageUrl} />
                     <View style={styles.cardInfo}>
                       <Text style={styles.card}>
@@ -262,12 +265,7 @@ const Send = () => {
                 ))}
               </View>
             </View>
-            <Pressable
-              style={styles.pres}
-              onPress={() => setMyCardsThree((prev) => (prev = data))}
-            >
-              <Text style={styles.more}>More</Text>
-            </Pressable>
+
           </ScrollView>
         </Box>
       </View>
@@ -325,7 +323,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     width: "15%",
     textAlign: "right",
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "MontserratRegular",
   },
   cardInfo: {

@@ -19,7 +19,7 @@ const GoBack = ({ navigation }) => {
   );
 };
 
-const Navbar = ({navigation}) => {
+const Navbar = ({ navigation }) => {
   const [font, setFont] = useContext(FontContext);
   const navigate = useNavigation()
   const routeName = useRoute();
@@ -29,7 +29,7 @@ const Navbar = ({navigation}) => {
     return (
       <View style={styles.navbar}>
         <View style={styles.view}>
-          <Pressable style={styles.pres} onPress={()=> navigate.navigate({name:"Home"})}>
+          <Pressable style={styles.pres} onPress={() => navigate.navigate({ name: "Home" })}>
             <Image
               source={
                 routeName.name.includes("Home")
@@ -63,10 +63,9 @@ const Navbar = ({navigation}) => {
 
           <Pressable
             style={
-              routeName.name == "Help"
-                ? { backgroundColor: "#171513", ...styles.pres }
-                : { ...styles.pres }
+              styles.pres
             }
+            onPress={() => navigate.navigate({ name: "Help" })}
           >
             <Image
               source={
@@ -105,25 +104,25 @@ const Navbar = ({navigation}) => {
               Notices
             </Text>
           </Pressable>
-          <Pressable style={styles.pres} onPress={()=> navigate.navigate({name:"More"})}>
-          <Image
-            source={
-              routeName.name === "More"
-                ? require("../assets/images/icons/menu-hamburger-dark.png")
-                : require("../assets/images/icons/menu-hamburger.png")
-            }
-            style={{ width: 33, height: 33 }}
-          />
-          <Text
-            style={
-              routeName.name === "More"
-                ? { ...styles.text, color: "#fff" }
-                : styles.text
-            }
-          >
-            Notices
-          </Text>
-        </Pressable>
+          <Pressable style={styles.pres} onPress={() => navigate.navigate({ name: "More" })}>
+            <Image
+              source={
+                routeName.name === "More"
+                  ? require("../assets/images/icons/menu-hamburger-dark.png")
+                  : require("../assets/images/icons/menu-hamburger.png")
+              }
+              style={{ width: 33, height: 33 }}
+            />
+            <Text
+              style={
+                routeName.name === "More"
+                  ? { ...styles.text, color: "#fff" }
+                  : styles.text
+              }
+            >
+              More
+            </Text>
+          </Pressable>
         </View>
       </View>
     );
@@ -134,24 +133,24 @@ const styles = StyleSheet.create({
   navbar: {
     width: "100%",
 
-    height: 50,
+    height: 70,
     alignItems: "center",
     position: "absolute",
     bottom: 0,
-    backgroundColor: "#060606",
+    backgroundColor: "#fff",
   },
   view: {
-    width: "95%",
-    borderRadius: 30,
+    width: "100%",
+    borderRadius: 0,
 
-    height: 80,
+    height: 70,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     overflow: "hidden",
     backgroundColor: "#282828",
     position: "absolute",
-    top: -50,
+
   },
   pres: {
     width: "15%",

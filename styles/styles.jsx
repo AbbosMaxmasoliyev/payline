@@ -73,7 +73,7 @@ let GlobalStyle = StyleSheet.create({
   gradient: {
     backgroundColor: "#060606",
     minWidth: width,
-    minHeight: height,
+    minHeight: "100%",
   },
   left: {
    

@@ -5,18 +5,18 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
+  Keyboard
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Gradient from "../components/Gradient";
 import { Navbar } from "../components/Navbar";
 import CardSelection from "../components/CardSelection";
 import Box from "../components/Box";
-import CustomKeyboard from "../components/KeyboardNumber";
 import { Image } from "react-native";
 import { useEffect, useState } from "react";
 import NumberKey from "../components/NumberKey";
 
-const SelectCard = ({navigation}) => {
+const SelectCard = ({ navigation }) => {
   let { height, width } = Dimensions.get("window");
   // const navigation = useNavigation();
   const [cardSelect, setCardSelect] = useState("");
@@ -28,6 +28,7 @@ const SelectCard = ({navigation}) => {
   const [completed, setCompleted] = useState(false);
   const next = () => {
     if (cvvValue == 122) {
+      Keyboard.dismiss()
       setSending(true);
       setTimeout(() => {
         setSuccess(false);
@@ -40,17 +41,22 @@ const SelectCard = ({navigation}) => {
 
       setTimeout(() => {
         setCompleted(false);
-      }, 5000);
+      }, 4500);
     } else {
       setCvvfalse(true);
     }
   };
+
+
+  useEffect(() => {
+    Keyboard.dismiss
+  })
   return (
     <Gradient>
       <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
         <Box style={{ width: "90%" }}>
           <CardSelection
-           navigation={navigation}
+            navigation={navigation}
             selectcard={(e) => {
               setCardSelect(e);
               setKeyboardShow(true);
@@ -63,7 +69,7 @@ const SelectCard = ({navigation}) => {
           style={{
             position: "absolute",
             width: "100%",
-            height: "70%",
+            height: "40%",
             zIndex: 2,
             bottom: 0,
             backgroundColor: "#060606",
@@ -92,6 +98,8 @@ const SelectCard = ({navigation}) => {
               textAlign: "center",
               fontFamily: "Monstserrat",
             }}
+            keyboardType="decimal-pad"
+            onChangeText={(e) => setCvvValue(e)}
           />
           {cvvFalse ? (
             <Text style={{ color: "#FF6A00", ...styles.cvvFalse }}>
@@ -102,14 +110,7 @@ const SelectCard = ({navigation}) => {
               3 digits on the back of your card
             </Text>
           )}
-          <CustomKeyboard
-            onKeyPress={(e) => setCvvValue((prev) => prev + e)}
-            style={{
-              marginTop: 0,
-              height: "50%",
-            }}
-            deleteLet={() => setCvvValue((prev) => prev.slice(0, -1))}
-          />
+
           <TouchableOpacity style={styles.touch} onPress={() => next()}>
             <Text style={styles.touchtext}>Confirm</Text>
           </TouchableOpacity>
@@ -217,6 +218,7 @@ const SelectCard = ({navigation}) => {
             alignItems: "center",
           }}
         >
+          <Image style={{width:80, height:80}} source={require("../assets/images/success.gif")} />
           <Text
             style={{
               color: "#FF6A00",
@@ -248,7 +250,7 @@ const styles = StyleSheet.create({
   touch: {
     width: "90%",
     alignSelf: "center",
-    height: "10%",
+    height: 50,
     borderRadius: 30,
     backgroundColor: "#FF6A00",
     flexDirection: "row",

@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   Pressable,
+  KeyboardAvoidingView,
 } from "react-native";
 import Gradient from "../components/Gradient";
 import { useRoute } from "@react-navigation/native";
@@ -27,133 +28,118 @@ const DeliverCard = ({ navigation }) => {
     <Gradient
       style={{ justifyContent: "center", alignItem: "center", width: width }}
     >
-      {enterCard ? (
-        <Box
-          style={{
-            height: height * 0.6,
-            width: width * 0.9,
-            alignSelf: "center",
-            justifyContent: "space-around",
-            paddingHorizontal: 13,
-          }}
-        >
-          <View style={{ alignItems: "flex-start", justifyContent: "center" }}>
-            <Text style={styles.title}>
-              Select how to deliver money to {route.params.country.name}
-            </Text>
-            <Text style={styles.popu}>Popular</Text>
-          </View>
-          <Box style={styles.box}>
-            <View style={styles.bank}>
-              <Image
-                style={{ width: "10%" }}
-                source={require("../assets/images/bankCardUp.png")}
-              />
-              <View style={styles.bankInfo}>
-                <Text style={styles.bankInfoTitle}>To bank cards</Text>
-                <Text style={styles.bankInfoSubtitle}>
-                  Humo, Mastercard, Mir, Union Pay, Uzcard or Visa
-                </Text>
-              </View>
+      <KeyboardAvoidingView  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        {enterCard ? (
+          <Box
+            style={{
+              height: height * 0.6,
+              width: width * 0.9,
+              alignSelf: "center",
+              justifyContent: "space-around",
+              paddingHorizontal: 13,
+            }}
+          >
+            <View style={{ alignItems: "flex-start", justifyContent: "center" }}>
+              <Text style={styles.title}>
+                Select how to deliver money to {route.params.country.name}
+              </Text>
+              <Text style={styles.popu}>Popular</Text>
             </View>
-            <View
-              style={{ width: "100%", borderWidth: 1, borderColor: "#FF7B01" }}
-            ></View>
-            <View style={styles.cardBottom}>
-              <View style={styles.property}>
-                <Text style={styles.propertyTitle}>Limit:</Text>
-                <Text style={styles.propertySubtitle}>14.999.000</Text>
+            <Box style={styles.box}>
+              <View style={styles.bank}>
+                <Image
+                  style={{ width: "10%" }}
+                  source={require("../assets/images/bankCardUp.png")}
+                />
+                <View style={styles.bankInfo}>
+                  <Text style={styles.bankInfoTitle}>To bank cards</Text>
+                  <Text style={styles.bankInfoSubtitle}>
+                    Humo, Mastercard, Mir, Union Pay, Uzcard or Visa
+                  </Text>
+                </View>
               </View>
-              <View style={styles.property}>
-                <Text style={styles.propertyTitle}>Fee:</Text>
-                <Text style={styles.propertySubtitle}>14.999.000</Text>
+              <View
+                style={{ width: "100%", borderWidth: 1, borderColor: "#FF7B01" }}
+              ></View>
+              <View style={styles.cardBottom}>
+                <View style={styles.property}>
+                  <Text style={styles.propertyTitle}>Limit:</Text>
+                  <Text style={styles.propertySubtitle}>14.999.000</Text>
+                </View>
+                <View style={styles.property}>
+                  <Text style={styles.propertyTitle}>Fee:</Text>
+                  <Text style={styles.propertySubtitle}>14.999.000</Text>
+                </View>
+                <View style={styles.property}>
+                  <Text style={styles.propertyTitle}>Should Arrive:</Text>
+                  <Text style={styles.propertySubtitle}>In a few minutes</Text>
+                </View>
               </View>
-              <View style={styles.property}>
-                <Text style={styles.propertyTitle}>Should Arrive:</Text>
-                <Text style={styles.propertySubtitle}>In a few minutes</Text>
-              </View>
-            </View>
-          </Box>
+            </Box>
 
-          <TouchableOpacity
-            style={styles.touch}
-            onPress={() => setEntercard(true)}
-          >
-            <Text style={styles.touchText}>Continue</Text>
-          </TouchableOpacity>
-        </Box>
-      ) : (
-        <Box
-          style={{
-            height: height * 0.6,
-            width: width * 0.9,
-            alignSelf: "center",
-            justifyContent: "space-around",
-            paddingHorizontal: 13,
-          }}
-        >
-          <View style={{ alignItems: "flex-start", justifyContent: "center" }}>
-            <Text style={styles.title}>
-              Add the recepient’s card from {route.params.country.name}
-            </Text>
-          </View>
-          <Box style={styles.box}>
-            <View style={styles.bankTwo}>
-              <Image
-                style={{ width: "10%" }}
-                source={require("../assets/images/bank.png")}
-              />
-            </View>
-            <View
-              style={{ width: "100%", borderWidth: 1, borderColor: "#FF7B01" }}
-            ></View>
-            <View style={styles.cardBottomTwo}>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter card number"
-                placeholderTextColor={"#fff"}
-                onPressIn={() => setKeyboardShow(true)}
-                value={cardValue}
-              />
-            </View>
+            <TouchableOpacity
+              style={styles.touch}
+              onPress={() => setEntercard(true)}
+            >
+              <Text style={styles.touchText}>Continue</Text>
+            </TouchableOpacity>
           </Box>
+        ) : (
+          <Box
+            style={{
+              height: height * 0.6,
+              width: width * 0.9,
+              alignSelf: "center",
+              justifyContent: "space-around",
+              paddingHorizontal: 13,
+            }}
+          >
+            <View style={{ alignItems: "flex-start", justifyContent: "center" }}>
+              <Text style={styles.title}>
+                Add the recepient’s card from {route.params.country.name}
+              </Text>
+            </View>
+            <Box style={styles.box}>
+              <View style={styles.bankTwo}>
+                <Image
+                  style={{ width: "10%" }}
+                  source={require("../assets/images/bank.png")}
+                />
+              </View>
+              <View
+                style={{ width: "100%", borderWidth: 1, borderColor: "#FF7B01" }}
+              ></View>
+              <View style={styles.cardBottomTwo}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter card number"
+                  placeholderTextColor={"#fff"}
+                  onPressIn={() => setKeyboardShow(true)}
+                  value={cardValue}
+                />
+              </View>
+            </Box>
 
-          <Text style={styles.popu}>
-            Should be Humo, Mastercard, Mir, Union Pay, Uzcard or Visa
-          </Text>
-          <TouchableOpacity
-            style={styles.touch}
-            onPress={() =>
-              navigation.navigate("Home_Send_Calculator", {
-                params: {
-                  select: route.params,
-                },
-                card:cardValue
-              })
-            }
-          >
-            <Text style={styles.touchText}>Continue</Text>
-          </TouchableOpacity>
-        </Box>
-      )}
-      {keyboardShow ? (
-        <View style={styles.keyboard}>
-          <Pressable
-            onPress={() => setKeyboardShow(false)}
-            style={{ marginTop: 10, marginLeft: 10 }}
-          >
-            <Image
-              source={require("../assets/images/icons/fi-rr-angle-small-down.png")}
-            />
-          </Pressable>
-          <CustomKeyboard
-            onKeyPress={(e) => setCardValue((prev) => (prev += e))}
-            deleteLet={() => setCardValue((prev) => prev.slice(0, -1))}
-            style={{ paddingVertical: 0, padding: 0, height: "85%" }}
-          />
-        </View>
-      ) : null}
-      <Navbar />
+            <Text style={styles.popu}>
+              Should be Humo, Mastercard, Mir, Union Pay, Uzcard or Visa
+            </Text>
+            <TouchableOpacity
+              style={styles.touch}
+              onPress={() =>
+                navigation.navigate("Home_Send_Calculator", {
+                  params: {
+                    select: route.params,
+                  },
+                  card: cardValue
+                })
+              }
+            >
+              <Text style={styles.touchText}>Continue</Text>
+            </TouchableOpacity>
+          </Box>
+        )}
+
+      </KeyboardAvoidingView>
     </Gradient>
   );
 };

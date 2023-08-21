@@ -1,9 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Image, ScrollView } from "react-native";
+import { Dimensions, Image, ScrollView, TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { FontContext } from "./Context";
 import CountryTransfer from "./CountryTransfer";
+import { useNavigation } from "@react-navigation/native";
+
+const {width, height}= Dimensions.get("screen")
+
 const Transactions = () => {
+  const navigation = useNavigation()
+
   const [font, setFont] = useContext(FontContext);
 
 
@@ -117,7 +123,9 @@ const Transactions = () => {
           
          
           {data.map((item, index) => (
-            <View key={index} style={{ ...styles.transactionsItem }}>
+            <TouchableOpacity key={index} style={{ ...styles.transactionsItem }} onPress={()=>{
+              navigation.navigate("Home_TransactionHistory", {transaction:item})
+            }}>
               
               <CountryTransfer image={item.country.imageUrl}/>
               <View style={styles.info}>
@@ -140,7 +148,7 @@ const Transactions = () => {
                   />
                 )}
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
       </View>
     );
@@ -150,12 +158,9 @@ export default Transactions;
 const styles = StyleSheet.create({
   transactions: {
  
-    width: "90%",
+    width: "100%",
     alignSelf: "center",
     padding: 13,
-    borderWidth: 2,
-    borderColor: "rgba(255, 130, 0, 0.40)",
-    borderStyle: "solid",
     borderRadius: 15,
     backgroundColor: "rgba(68, 67, 67, 0.20)",
     marginBottom:100
@@ -164,6 +169,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "MonstserratLight",
     lineHeight: 20,
+    fontSize:width/30
   },
   title: {
     fontSize: 18,
@@ -195,11 +201,12 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: "Monstserrat",
     color: "#fff",
+    fontSize:width/28
   },
   info: {
-    width: "55%",
+    width: "50%",
     flexDirection: "column",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
 
     height: "100%",
   },
